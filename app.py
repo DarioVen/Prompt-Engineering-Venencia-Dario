@@ -30,9 +30,9 @@ if st.button("Analizar"):
                 words = email_content.split()
                 truncated_content = ' '.join(words[:150])
                 
-                # Generar dos análisis diferentes para mayor detalle
+                # Generar análisis con prompt mejorado
                 summary_results = generator(
-                    truncated_content,
+                    f"Analiza este correo electrónico y extrae los puntos más importantes: {truncated_content}",
                     max_length=150,
                     min_length=50,
                     length_penalty=2.0,
@@ -40,9 +40,9 @@ if st.button("Analizar"):
                     early_stopping=True
                 )
                 
-                # Generar un segundo análisis con enfoque en detalles
+                # Generar detalles con prompt mejorado
                 detail_results = generator(
-                    f"Detalles importantes y tareas específicas del siguiente texto: {truncated_content}",
+                    f"Lista las tareas pendientes, fechas importantes y acciones requeridas de este correo: {truncated_content}",
                     max_length=200,
                     min_length=75,
                     length_penalty=2.5,
